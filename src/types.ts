@@ -1,3 +1,5 @@
+import { FastifyRequest } from 'fastify';
+
 export interface ItemInput {
   market_hash_name: string;
   currency: string;
@@ -29,10 +31,25 @@ export interface User {
   transactions: Transaction[];
 }
 
+export interface UserData {
+  password_hash: string;
+  user_id: number;
+  balance: number
+}
+
 export interface BuyItemRequest {
   market_hash_name: string;
   user_id: number;
   price: number;
+}
+
+export interface RequestWithUser extends FastifyRequest {
+  user?: User;
+}
+
+export interface LoginRequest {
+  password: string;
+  user_id: number;
 }
 
 export enum Tradable {

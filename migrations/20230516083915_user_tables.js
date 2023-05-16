@@ -16,7 +16,7 @@ exports.up = async (knex) => {
   await knex.table('users_transactions').insert({ user_id: 1, amount: 100, action: 0 });
   await knex.table('users_transactions').insert({ user_id: 1, amount: 100, action: 0 });
   await knex.table('users_transactions').insert({ user_id: 1, amount: 100, action: 0 });
-  await knex.table('users').insert({ user_id: 1, balance: 300, password_hash: '' });
+  await knex.table('users').insert({ user_id: 1, balance: 300, password_hash: '$2b$10$vByZ76K9nuzlZtM.NZT2du7xVCf1ua8EVve8J2YofPiw2RmT.AnqK' });
 };
 
 exports.down = async (knex) => {

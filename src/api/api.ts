@@ -16,10 +16,12 @@ export class Api {
       logger: true
     });
 
+    // Endpoint for retrieving a list of items, with an additional field min_price_tradable.
     this.app.get('/items', getItemsOptions, async () => {
       return externalApi.getItemsList();
     });
 
+    // Endpoint for retrieving a user and their transactions by id
     this.app.get<{ Params: { id: number } }>('/users/:id', getUserOptions, async (request, reply) => {
       const { id } = request.params;
       const user = await userRepository.getUserById(id);
@@ -27,8 +29,9 @@ export class Api {
       return user;
     });
 
+    // Endpoint for purchasing an item.
     this.app.post<{ Body: BuyItemRequest }>('/users/buy', buyItemOptions, async (request, reply) => {
-      const { market_hash_name: itemName, user_id: userId, price } = request.body;
+      const { user_id: userId, price } = request.body;
 
       const user = await userRepository.getUserById(userId);
 

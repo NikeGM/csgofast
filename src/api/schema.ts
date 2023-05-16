@@ -5,11 +5,10 @@ export const buyItemOptions: RouteShorthandOptions = {
     body: {
       type: 'object',
       properties: {
-        market_hash_name: { type: 'string' },
         user_id: { type: 'integer' },
         price: { type: 'number' }
       },
-      required: ['market_hash_name', 'user_id', 'price']
+      required: [ 'user_id', 'price']
     },
     response: {
       200: {

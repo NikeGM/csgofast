@@ -16,7 +16,8 @@
 		"lint": "xo",
 		"lint:fix": "xo --fix",
 		"update": "npx npm-check-updates",
-		"update:force": "npx npm-check-updates -u"
+		"update:force": "npx npm-check-updates -u",
+		"migrate": "knex migrate:latest --esm"
 	},
 	"lint-staged": {
 		"*.ts": "xo"

@@ -3,7 +3,7 @@ version: "3"
 services:
   postgres:
     image: "postgres"
-    container_name: "postgres"
+    container_name: "postgres-test"
     hostname: postgres
     restart: always
     env_file:

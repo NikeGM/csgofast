@@ -3,6 +3,7 @@ import { ExternalApi } from 'src/external-api';
 import { UserRepository } from 'src/user-repository';
 import { buyItemOptions, getItemsOptions, getUserOptions } from 'src/api/schema';
 import { BuyItemRequest } from 'src/types';
+import logger from 'src/utils/log';
 
 export class Api {
   private app: FastifyInstance;
@@ -52,10 +53,10 @@ export class Api {
     const port = +(process.env.API_PORT || 3000);
     this.app.listen({ port }, (err, address) => {
       if (err) {
-        console.error(err);
+        logger.error(`Error while running api. ${err.stack}`);
         process.exit(1);
       }
-      console.log(`Server is running on ${port}`);
+      logger.info(`Server is running on ${port}`);
     });
   }
 }

@@ -1,5 +1,6 @@
 import { type PoolClient, type Pool } from 'pg';
 import pgTx from '@onmoon/pg-tx';
+import logger from 'src/utils/log';
 
 export class PgUtils {
   constructor(private readonly pool: Pool) {
@@ -9,7 +10,7 @@ export class PgUtils {
     return new Promise((res, rej) => {
       this.pool.connect(async (err: Error, client: PoolClient, release: () => void) => {
         if (err) {
-          console.error('Error acquiring client from pool', err);
+          logger.error(`Error acquiring client from pool ${err}`);
           rej(err);
           return;
         }

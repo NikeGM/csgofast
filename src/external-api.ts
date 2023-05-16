@@ -1,6 +1,7 @@
 import { Item, ItemInput, Tradable } from 'src/types';
 import axios, { AxiosResponse } from 'axios';
 import NodeCache from 'node-cache';
+import logger from 'src/utils/log';
 
 export class ExternalApi {
   private cache = new NodeCache();
@@ -12,11 +13,11 @@ export class ExternalApi {
   public async getItemsList(): Promise<Item[]> {
     let items = this.cache.get<Item[]>(this.key);
     if (items == undefined) {
-      console.log(`Data for param ${this.key} not found in cache`);
+      logger.info(`Data for param ${this.key} not found in cache`);
       items = await this.getMergedItems();
       this.cache.set(this.key, items, +(process.env.CACHE_EXPIRATION_TIMEOUT || 3600));
     } else {
-      console.log(`Data for param ${this.key} found in cache`);
+      logger.info(`Data for param ${this.key} found in cache`);
     }
     return items;
   }
@@ -34,7 +35,7 @@ export class ExternalApi {
   private async getItemsFromExternalApi(tradable: Tradable): Promise<ItemInput[]> {
     try {
       if (!process.env.EXTERNAL_API_URL) {
-        console.log('External api url is undefined');
+        logger.error('External api url is undefined');
         return [];
       }
       const response: AxiosResponse<ItemInput[]> = await axios.get(process.env.EXTERNAL_API_URL, {
@@ -45,7 +46,7 @@ export class ExternalApi {
 
       return response.data
     } catch (error) {
-      console.error(error);
+      logger.error(`Error requesting external api ${error}`);
       return [];
     }
   }

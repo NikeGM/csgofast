@@ -41,7 +41,7 @@ export class Api {
         return;
       }
 
-      await userRepository.buy(userId, itemName, price);
+      await userRepository.buy(userId, price);
 
       reply.send({ success: true, message: 'Purchase successful' });
     });

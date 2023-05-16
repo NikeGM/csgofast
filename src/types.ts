@@ -18,7 +18,7 @@ export interface Item extends ItemInput {
 
 export interface Transaction {
   user_id: number;
-  action: string;
+  action: Action;
   amount: number;
   ts: number;
 }
@@ -38,4 +38,9 @@ export interface BuyItemRequest {
 export enum Tradable {
   NOT_TRADABLE = 0,
   TRADABLE = 1
+}
+
+export enum Action {
+  SELL = 0,
+  BUY = 1
 }
